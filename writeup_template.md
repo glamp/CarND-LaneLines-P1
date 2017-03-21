@@ -34,7 +34,7 @@ My pipeline consisted of 7 steps:
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by:
 
-I split the resulting lines from the Hough transform into "left" and "right" lines. Left lines were lines with a negative slope (`y2 - y1 / x2 - x1`), lines with a positive slope were right lines. I tossed out any lines that had a slope with a magnitude > 1 or < 0.5.
+I split the resulting lines from the Hough transform into "left" and "right" lines. Left lines were lines with a x1 on the left half of the image and right lines the opposite. I tossed out any lines that had a slope with a magnitude > 1 or < 0.5.
 
 With the remaining left and right lines, I decided to fit a linear regression model to approximate each. I wanted to do weighted regression so that longer lines would count for more in my resulting fit. First I "filled in" the starting and ending points, (x1, y1) & (x2, y2), with intermediary points. For example, (1, 2) & (3, 4) would become: [(1, 2), (2, 3), (3, 4)]. Doing this made the longer lines more valuable in the resulting linear regression. So the easier to detect lines near the bottom of the image would count for more in the resulting fit.
 
@@ -49,7 +49,7 @@ If you'd like to include images to show how the pipeline works, here is how to i
 
 My method seems to be a bit "jittery" when run on the images. I think this might be because I'm not smoothing the image enough.
 
-Another issue is that my parameters for each algorithm are fixed. So my pipeline works well on the videos and images provided, but struggles with the challenge problem.
+Another issue is that my parameters for each algorithm are fixed. So my pipeline works well on the videos and images provided, but struggles with the challenge problem at times.
 
 ### 3. Suggest possible improvements to your pipeline
 
